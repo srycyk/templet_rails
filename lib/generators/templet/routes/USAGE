@@ -1,0 +1,14 @@
+Description:
+    Displays the routing entry for a REST controller.
+    If the option, --add-route is supplied then it actually writes this
+    routing information to the config/routes.rb file.
+
+Example:
+    rails generate templet:routes admin/user --parent group --add-route --actions index show
+
+    This example will add an entry near the top of:
+        config/routes.rb
+    as follows:
+        namespace('admin') do
+          resources(:groups, only: []) { resources(:users, only: %i(index show)) }
+        end

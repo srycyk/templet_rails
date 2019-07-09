@@ -1,0 +1,108 @@
+
+class <%= class_name.pluralize %>Controller < ApplicationController
+  include Templet::ViewerResponders
+<%= before_action parent -%>
+<%= before_action model_name, set_model_actions if set_model? -%>
+
+<% if include_action? :index -%>
+  # GET /<%= path_controller %>
+  # GET /<%= path_controller %>.json
+  def index
+    @<%= model_plural %> = <%= receiver %>.all
+
+    respond_to_index
+  end
+
+<% end -%>
+<% if include_action? :show -%>
+  # GET /<%= path_controller '1' %>
+  # GET /<%= path_controller '1' %>.json
+  def show
+    respond_to_show
+  end
+
+<% end -%>
+<% if include_action? :new -%>
+  # GET /<%= path_controller 'new' %>
+  def new
+    @<%= model_name %> = <%= receiver %>.new
+
+    respond_to_new
+  end
+
+<% end -%>
+<% if include_action? :edit -%>
+  # GET /<%= path_controller %w(1 edit) %>
+  def edit
+    respond_to_edit
+  end
+
+<% end -%>
+<% if include_action? :create -%>
+  # POST /<%= path_controller '1' %>
+  # POST /<%= path_controller '1' %>.json
+  def create
+    @<%= model_name %> = <%= receiver %>.new(<%= model_name %>_params)
+
+    if @<%= model_name %>.save
+      respond_to_save_success(@<%= model_name %>, <%= redirect_path %>)
+    else
+      respond_to_save_failure(:new, @<%= model_name %>)
+    end
+  end
+
+<% end -%>
+<% if include_action? :update -%>
+  # PATCH/PUT /<%= path_controller '1' %>
+  # PATCH/PUT /<%= path_controller '1' %>.json
+  def update
+    if @<%= model_name %>.update(<%= model_name %>_params)
+      respond_to_save_success(@<%= model_name %>, <%= redirect_path %>)
+    else
+      respond_to_save_failure(:edit, @<%= model_name %>)
+    end
+  end
+
+<% end -%>
+<% if include_action?(:delete) or include_action?(:destroy) -%>
+  # DELETE /<%= path_controller '1' %>
+  # DELETE /<%= path_controller '1' %>.json
+  def destroy
+    @<%= model_name %>.destroy
+
+    respond_to_destroy(@<%= model_name %>, <%= redirect_path(false) %>)
+  end
+
+<% end -%>
+  private
+<% if parent -%>
+
+  def set_<%= parent %>
+    @<%= parent %> = <%= parent.classify %>.find(params[:<%= parent %>_id])
+  end
+<% end -%>
+<% if set_model? -%>
+
+  def set_<%= model_name %>
+    @<%= model_name %> = <%= receiver %>.find(params[:id])
+  end
+
+  def <%= model_name %>_params
+    params.require(:<%= model_name %>).permit(*<%= model_name %>_fields)
+  end
+
+  def <%= model_name %>_fields
+    %i(<%= model_fields(model_name).join ' ' %>)
+  end
+<% end -%>
+<% if model_name? -%>
+
+  def model_name
+    :<%= model_name %>
+  end
+<% end -%>
+
+  def viewer_options
+    super.merge({ <%= to_option :parent, parent %><%= to_option :grand_parent, grand_parent, ', ' %> })
+  end
+end

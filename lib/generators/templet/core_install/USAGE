@@ -1,0 +1,14 @@
+Description:
+    Installs the complete framework source under new directory trees,
+    by default, the core code is copied under app/helpers/templet/,
+    but you can change this with the option, DEST.
+    If you install under a directory, like lib/ or vendor/, then you must
+    uncomment the 'require' statements in the file, templet/require_all.rb.
+
+Example:
+    rails generate templet:core_insall --dest lib/
+
+    This will create:
+        app/controllers/templet/*  # Helper modules for invoking the framework
+        app/helpers/templet/**     # If dest is given, it replaces 'app/helpers'
+        app/helpers/templet_helper.rb  # For framework settings

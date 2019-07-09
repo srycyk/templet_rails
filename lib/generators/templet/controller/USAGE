@@ -1,0 +1,13 @@
+Description:
+    Creates a REST controller that calls a Viewer class to render a view.
+    If the PARENT option is valued then it creates a nested controller
+    with the given PARENT as the (inner) model.
+    If the MODEL option is given then it becomes the model name in the controller
+    - otherwise the model's name is inferred from the controller's name.
+    Controllers can be namespaced - but the corresponding model won't be.
+
+Example:
+    rails generate templet:controller admin/user --parent group --model person --grand-parent sector --actions index show new create destroy
+
+    This will create:
+        app/controllers/admin/users_controller.rb

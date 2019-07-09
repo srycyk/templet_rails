@@ -1,0 +1,10 @@
+Description:
+    Creates tests to check the HTML in the views using CSS selectors.
+    And further tests to check the JSON output from the controller.
+
+Example:
+    rails generate templet:rspec admin/user --model person --parent group --grand-parent sector
+
+    This will create:
+        spec/apis/admin/users_controller_spec.rb
+        spec/helpers/app/admin/user_viewer_spec.rb

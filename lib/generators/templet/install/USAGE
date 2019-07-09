@@ -1,0 +1,14 @@
+Description:
+    This generator creates new application area, and is to be run just once.
+    It creates the directory tree, app/helpers/app/,
+    which is where your own (application) code should go underneath.
+
+Example:
+    rails generate templet:install
+
+    This will create:
+        app/helpers/app.rb         # For global settings in your own code
+        app/helpers/app/**         # Your own (application) code
+        spec/support/apis/*        # For testing JSON sent from the controller
+        spec/support/templet/*     # For testing the HTML in the rendered views
+

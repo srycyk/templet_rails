@@ -1,0 +1,19 @@
+Description:
+    Entirely removes the framework and nearly all of the generated code.
+    (It doesn't delete the generated controllers - you must do this yourself.)
+    The option, --pretend (-p) will show what files will be deleted,
+    without carrying out the actual erasure.
+    For safety, if it's called without any options it'll delete nothing.
+
+Examples:
+    # To get rid of the whole lot
+    rails generate templet:destroy --all
+
+    # To delete just the templet core tests - leaves everything else intact
+    rails generate templet:destroy --only-core-rspec
+
+    # To remove just the framework - perhaps before applying a future update!
+    rails generate templet:destroy --rm-core
+
+    # To get rid of all the application's viewer files
+    rails generate templet:destroy --rm-app

@@ -1,0 +1,22 @@
+Description:
+    Generates a CRUD controller that renders a view via a Viewer class,
+    an actual Viewer class (which renders HTML),
+    tests for the controller & views,
+    and a routing entry for config/routes.rb.
+    It should produce fully working code.
+    It invokes, in turn, the four generators:
+      templet:controller, templet:viewer, templet:rspec and templet:routes.
+    By default, the model's name is taken from that of the controller's,
+    to specify a different model name use the MODEL option
+
+Example:
+   rails generate templet:scaffold admin/user --model person --parent group --grand-parent department --child project --add-routes --actions index show
+
+    This will create:
+        app/controllers/admin/users_controller.rb
+        app/helpers/app/admin/user_viewer.rb
+        spec/apis/admin/users_controller_spec.rb
+        spec/helpers/app/admin/user_viewer_spec.rb
+
+    And, if requested, will add an entry to:
+        config/routes.rb

@@ -1,0 +1,10 @@
+Description:
+    Generates a single Viewer subclass, which is called by the controller
+    to actually render the view. In this class you may add your own
+    modifications that alter the default behaviour.
+
+Example:
+    rails generate templet:viewer user --child kid --actions index show
+
+    This will create:
+        app/helpers/app/user_viewer.rb
