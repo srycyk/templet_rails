@@ -1,3 +1,7 @@
+
 Rails.application.routes.draw do
-  mount TempletRails::Engine => "/templet_rails"
+  resources(:categories) { resources :questions }
+
+  resources(:questions, only: []) { resources :answers }
 end
+

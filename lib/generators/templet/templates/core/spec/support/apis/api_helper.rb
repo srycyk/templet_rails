@@ -1,4 +1,6 @@
 
+require 'rack/test/methods'
+
 module ApiHelper
   include Rack::Test::Methods
 

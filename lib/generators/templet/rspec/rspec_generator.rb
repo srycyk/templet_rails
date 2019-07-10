@@ -109,6 +109,7 @@ end
 
     %Q[
 require "rails_helper"
+require 'rack/test/methods'
 #{comment}
 RSpec.describe #{class_name.pluralize}Controller, type: :api do
   it_behaves_like "a json controller"#{action_syms ', '} do

@@ -8,11 +8,16 @@ module Templet
     CONTROLLER_SUBDIR = 'controllers/'
     APIS_SUBDIR = 'apis/'
 
+    LAYOUTS = '/layouts'
+
     source_root File.expand_path('./', __FILE__)
     desc
 
-    #DEST_DESC = 'The directory that the core code will be copied beneath'
+    #DEST_DESC = 'The directory that the app code will be copied beneath'
     #class_option :dest, type: :string, aliases: "-d", default: '', desc: DEST_DESC
+    DESC = "Add specs for the layouts (default: false)"
+    class_option 'include-layout-specs', type: :boolean, default: false, desc: DESC
+
 
     def ensure_uninstalled
       if dir = already_installed_at
@@ -32,9 +37,13 @@ module Templet
 
     def create_rspec_support
       if rspec?
-        directory spec_support_dir_source, spec_support_dir_target
+        %i(shared viewer).each do |subdir|
+          directory spec_support_dir_source(subdir), spec_support_dir_target
+        end
 
         directory api_support_dir_source, api_support_dir_target
+
+        create_layout_specs if include_layout_specs?
       end
     end
 
@@ -48,6 +57,14 @@ module Templet
       copy_helper 'app.rb'
     end
 
+    def create_layout_specs
+      layouts_source_dir = SOURCE_ROOT + SPEC_SUBDIR + LAYOUTS
+
+      layouts_target_dir = SPEC_SUBDIR + HELPERS_SUBDIR + APP_SUBDIR + LAYOUTS
+
+      directory layouts_source_dir, layouts_target_dir
+    end
+
     def app_dir_source
       SOURCE_ROOT + APP_SUBDIR
     end
@@ -55,8 +72,8 @@ module Templet
       APP_ROOT + HELPERS_SUBDIR + APP_SUBDIR
     end
 
-    def spec_support_dir_source
-      SOURCE_ROOT + spec_support_dir + 'viewer/'
+    def spec_support_dir_source(subdir)
+      SOURCE_ROOT + spec_support_dir + "#{subdir}/"
     end
     def spec_support_dir_target
       spec_support_dir + TEMPLET_SUBDIR
@@ -71,6 +88,10 @@ module Templet
 
     def dest_dirs
       [ APP_ROOT + HELPERS_SUBDIR + APP_SUBDIR ]
+    end
+
+    def include_layout_specs?
+      options['include-layout-specs']
     end
 
     def mount_engine

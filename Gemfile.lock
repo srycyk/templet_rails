@@ -1,4 +1,9 @@
 PATH
+  remote: ../templet
+  specs:
+    templet (0.1.1)
+
+PATH
   remote: .
   specs:
     templet_rails (0.1.0)
@@ -151,6 +156,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rspec-rails
   sqlite3
+  templet!
   templet_rails!
 
 BUNDLED WITH

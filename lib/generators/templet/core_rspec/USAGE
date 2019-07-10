@@ -1,16 +1,13 @@
 Description:
-    Generates Rspec tests for two sections of the core code.
-    First, tests to check the HTML in the view layouts.
-    Second, an optional step that adds various tests for the framework itself.
-    This second step is superfluous unless you're going to change the source
+    Generates Rspec tests for the core code.
+    It is superfluous unless you're going to change the source
     code - as these tests offer few, if any, real safeguards.
-    Note that the framework tests (second step) will only be installed if
-    the option, --include-core-specs is given, and also if the core is kept
+    Note that the tests will only be installed if the core is kept
     in its default directory, i.e. under app/helpers/templet/.
 
 Example:
     rails generate template:core_rspec --include-core-specs
 
     This will create files under the directories:
-        spec/helpers/app/panel/  # For testing layouts
-        spec/helpers/templet/    # If --include-core-specs is given
+        spec/helpers/templet/
+        spec/suppoert/templet/

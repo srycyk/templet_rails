@@ -6,14 +6,6 @@ class Answer < ApplicationRecord
 
   validates :reply, presence: true
 
-=begin
-  validates_with Concerns::NastyCharValidator
-
-  scope :activated, -> (is_active=true) { where active: is_active }
-
-  scope :in_order, -> { order :reply }
-=end
-
   def to_s
     reply
   end

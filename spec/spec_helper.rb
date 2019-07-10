@@ -97,7 +97,8 @@ end
 
 require 'factory_bot'
 
-#Dir["./spec/support/**/*.rb"].each {|file| require file }
+Dir["./spec/support/**/*.rb"].each {|file| require file }
+Dir["./spec/dummy/spec/support/**/*.rb"].each {|file| require file }
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods

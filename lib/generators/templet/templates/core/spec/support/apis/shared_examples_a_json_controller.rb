@@ -63,7 +63,7 @@ shared_examples 'a json controller' do |actions|
   let(:model) { create model_singular, field_name => field_value }
 
   let(:models) do
-    field_values.map {|name| create model_singular, field_name => name }
+    field_values.map {|value| create model_singular, field_name => value }
   end
 
   # Request parameters

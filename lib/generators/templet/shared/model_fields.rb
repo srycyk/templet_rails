@@ -24,8 +24,8 @@ module Shared
     def field_with_type(model_name, types)
       names_to_types = model_types(model_fields model_name)
 
-      types.each do |wanted_type|
-        names_to_types.each do |(name, type)|
+      names_to_types.each do |(name, type)|
+        types.each do |wanted_type|
           return name, type if type == wanted_type
         end
       end

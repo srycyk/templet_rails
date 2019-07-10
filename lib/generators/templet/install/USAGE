@@ -1,14 +1,16 @@
 Description:
-    This generator creates new application area, and is to be run just once.
+    This generator creates a new application area, and is to be run just once.
     It creates the directory tree, app/helpers/app/,
-    which is where your own (application) code should go underneath.
+    which is where your own (application) code goes underneath.
+    The option --include-core-specs (default: false) adds starter tests that
+    check the HTML in the supplied view layouts.
 
 Example:
-    rails generate templet:install
+    rails generate templet:install --include-layout-specs
 
     This will create:
         app/helpers/app.rb         # For global settings in your own code
         app/helpers/app/**         # Your own (application) code
         spec/support/apis/*        # For testing JSON sent from the controller
         spec/support/templet/*     # For testing the HTML in the rendered views
-
+        spec/helpers/app/layouts/  # For testing layouts - if requested
